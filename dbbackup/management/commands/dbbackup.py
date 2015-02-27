@@ -21,6 +21,7 @@ from ...storage.base import StorageError
 
 DATABASE_KEYS = getattr(settings, 'DBBACKUP_DATABASES', settings.DATABASES.keys())
 CLEANUP_KEEP = getattr(settings, 'DBBACKUP_CLEANUP_KEEP', 10)
+TMP_DIR = getattr(settings, 'DBBACKUP_TMP_DIR', None)
 
 
 class Command(LabelCommand):
@@ -55,7 +56,7 @@ class Command(LabelCommand):
     def save_new_backup(self, database):
         """ Save a new backup file. """
         print "Backing Up Database: %s" % database['NAME']
-        output_file = tempfile.SpooledTemporaryFile(max_size=10 * 1024 * 1024)
+        output_file = tempfile.SpooledTemporaryFile(max_size=10 * 1024 * 1024,dir=TMP_DIR)
         output_file.name = self.dbcommands.filename(self.servername)
         self.dbcommands.run_backup_commands(output_file)
 
