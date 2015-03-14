@@ -38,7 +38,7 @@ class Storage(BaseStorage):
     def list_directory(self):
         """ List all stored backups for the specified. """
         filepaths = os.listdir(self.BACKUP_DIRECTORY)
-        return sorted([path for path in filepaths if os.path.isfile(path)])
+        return sorted([path for path in filepaths if os.path.isfile(os.path.join(self.BACKUP_DIRECTORY,path))])
         #return sorted(filter(os.path.isfile, filepaths))
 
     def write_file(self, filehandle):
