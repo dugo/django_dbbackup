@@ -80,7 +80,6 @@ class Command(LabelCommand):
         if self.clean:
             print "Cleaning Old Backups for: %s" % database['NAME']
             filepaths = self.storage.list_directory()
-            print filepaths
             filepaths = self.dbcommands.filter_filepaths(filepaths)
             for filepath in sorted(filepaths[0:-CLEANUP_KEEP]):
                 regex = r'^%s' % self.dbcommands.filename_match(self.servername, '(.*?)')
