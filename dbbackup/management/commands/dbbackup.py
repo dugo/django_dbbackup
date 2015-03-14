@@ -48,7 +48,7 @@ class Command(LabelCommand):
             for database_key in database_keys:
                 database = settings.DATABASES[database_key]
                 self.dbcommands = DBCommands(database)
-                self.save_new_backup(database)
+                #self.save_new_backup(database)
                 self.cleanup_old_backups(database)
         except StorageError, err:
             raise CommandError(err)
