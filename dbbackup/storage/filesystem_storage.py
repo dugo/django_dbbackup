@@ -33,6 +33,8 @@ class Storage(BaseStorage):
 
     def delete_file(self, filepath):
         """ Delete the specified filepath. """
+        if not os.path.isabs(filepath):
+            filepath=os.path.join(self.BACKUP_DIRECTORY,filepath)
         os.unlink(filepath)
 
     def list_directory(self):
